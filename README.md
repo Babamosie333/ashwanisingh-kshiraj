@@ -1,12 +1,10 @@
-# Kshiraj Development website (Next.js + Tailwind + Framer Motion, light theme)
+# Kshiraj website (Next.js + Tailwind + Framer Motion + Supabase, light theme)
 
     npm install
-    npm run dev      # http://localhost:3000
+    npm run dev        # http://localhost:3000   (admin: /admin)
     npm run build
 
-Deploy: push to GitHub, import in Vercel (no settings needed).
-
-- Business details: `lib/config.js`
-- Colors and fonts: `tailwind.config.js`
-- Plot data (SAMPLE, replace with real): `components/PlotMap.jsx` (makePlots)
-# ashwanisingh-kshiraj
+- Works before Supabase is set up: the public site shows the 8 starter sites.
+- Fill `.env.local` (URL + anon key), run `supabase/schema.sql`, create one admin user. Then use /admin.
+- Business details: `lib/config.js` · Colors/fonts: `tailwind.config.js` · Starter sites: `lib/seed.js`
+- Deploy: push to GitHub, import in Vercel, add the same two env vars in Vercel settings.

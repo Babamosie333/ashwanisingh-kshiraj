@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-html { scroll-behavior: smooth; scroll-padding-top: 72px; color-scheme: light; }
-body { @apply bg-paper text-ink font-sans text-[17px] leading-relaxed; padding-bottom: 84px; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; color-scheme: light; }
+body { @apply bg-paper text-ink font-sans text-[17px] leading-relaxed antialiased; padding-bottom: 84px; }
 @media (min-width: 768px) { body { padding-bottom: 0; } }
 :focus-visible { outline: 3px solid #b8923f; outline-offset: 2px; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -12,6 +12,9 @@ body { @apply bg-paper text-ink font-sans text-[17px] leading-relaxed; padding-b
   .btn { @apply inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl border-2 border-transparent px-6 py-3 font-bold transition active:scale-95; }
   .btn-wa { @apply bg-leaf text-white hover:bg-leaf-dark; }
   .btn-call { @apply border-current bg-transparent; }
+  .btn-gold { @apply bg-gold text-[#1b1405] hover:brightness-95; }
   .wrap { @apply mx-auto max-w-6xl px-5; }
   .h2 { @apply font-serif text-3xl font-extrabold tracking-tight text-navy md:text-4xl; }
+  .rule { @apply mt-3 h-[3px] w-16 rounded bg-gold; }
+  .input { @apply min-h-[48px] w-full rounded-xl border-[1.5px] border-line bg-paper p-3 text-ink; }
 }
