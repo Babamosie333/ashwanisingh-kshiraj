@@ -22,7 +22,9 @@ export default function EmiPlan({ s }) {
   if (!rates.length) return null;
 
   // Example maths: down payment 25%, balance 75% split equally, no interest.
-  const n = Math.min(10000, Math.max(0, Math.floor(Number(size)) || 0));
+  // Plot size always snaps to the nearest 50 sq yard (50, 100, 150, 200, 250 ...).
+  const raw = Number(size);
+  const n = raw > 0 ? Math.min(10000, Math.max(50, Math.round(raw / 50) * 50)) : 0;
   const total = rate * n, down = Math.round(total * 0.25), balance = total - down;
   const plans = Array.from({ length: maxY }, (_, i) => {
     const y = i + 1, m = y * 12;
@@ -57,8 +59,9 @@ export default function EmiPlan({ s }) {
         <div><b className="text-sm text-mute">Plot size (sq yard)</b>
           <div className="mt-2 flex flex-wrap items-center gap-2">
             {SIZES.map((z) => <button key={z} type="button" className={chip(n === z)} aria-pressed={n === z} onClick={() => setSize(String(z))}>{z}</button>)}
-            <input type="number" inputMode="numeric" min="1" max="10000" value={size} onChange={(e) => setSize(e.target.value)} aria-label="Custom plot size in square yards" className="input !min-h-[44px] !w-28" />
-          </div></div>
+            <input type="number" inputMode="numeric" min="50" max="10000" step="50" value={size} onChange={(e) => setSize(e.target.value)} onBlur={() => n > 0 && setSize(String(n))} aria-label="Custom plot size in square yards" className="input !min-h-[44px] !w-28" />
+          </div>
+          <p className="mt-2 text-xs text-mute">Plot sizes go in steps of 50 sq yard. Any other number is rounded to the nearest 50.</p></div>
       </div>
 
       {n > 0 ? (
@@ -101,7 +104,7 @@ export default function EmiPlan({ s }) {
             </table>
           </div>
         </>
-      ) : <p role="alert" className="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-800">Enter a plot size between 1 and 10,000 sq yard.</p>}
+      ) : <p role="alert" className="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-800">Enter a plot size of 50 sq yard or more.</p>}
 
       <ol className="mt-6 grid gap-3 sm:grid-cols-3">
         {stages.map(([a, b, c, cls], i) => (
